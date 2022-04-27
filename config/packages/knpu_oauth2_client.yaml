@@ -1,0 +1,13 @@
+knpu_oauth2_client:
+    clients:
+        discord:
+            # must be "discord" - it activates that type!
+            type: discord
+            # add and set these environment variables in your .env files
+            client_id: '%env(DISCORD_ID)%'
+            client_secret: '%env(DISCORD_SECRET)%'
+            # a route name you'll create
+            redirect_route: oauth_check
+            redirect_params: {
+                service: discord
+            }
