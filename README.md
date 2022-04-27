@@ -62,7 +62,7 @@ The following tools were used in this project:
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com), [PHP](https://nodejs.org/en/), [Symfony](https://symfony.com/), [Composer](https://getcomposer.org/) and a system for local development (i personally use [Laragon](https://laragon.org/)) installed.
 
 ## :checkered_flag: Starting ##
 
