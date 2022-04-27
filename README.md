@@ -71,13 +71,13 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 $ git clone https://github.com/AlexandreSama/Configurateur
 
 # Access
-$ cd patouuuwebsite
+$ cd Configurateur
 
 # Install dependencies
-$ yarn
+$ composer install
 
 # Run the project
-$ yarn start
+$ symfony serve
 
 # The server will initialize in the <http://localhost:3000>
 ```
