@@ -1,9 +1,9 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="PatouuuWebsite" />
+  <img src="./.github/app.gif" alt="Configurateur" />
 
   &#xa0;
 
-  <!-- <a href="https://patouuuwebsite.netlify.app">Demo</a> -->
+  <!-- <a href="https://Configurateur.netlify.app">Demo</a> -->
 </div>
 
 <h1 align="center">Configurator</h1>
