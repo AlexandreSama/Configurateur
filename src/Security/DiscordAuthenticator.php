@@ -18,10 +18,26 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 class DiscordAuthenticator extends OAuth2Authenticator{
+
     private $clientRegistry;
     private $entityManager;
     private $router;
 
+    /**
+     * The above function is a constructor function that takes in three parameters: ,
+     * , and . 
+     * 
+     * The constructor function is a special function that is called when an object is created. 
+     * 
+     * The constructor function is used to initialize the object's properties. 
+     * 
+     * The constructor function is called automatically
+     * 
+     * @param ClientRegistry clientRegistry This is the service that manages the OAuth clients.
+     * @param EntityManagerInterface entityManager This is the entity manager that will be used to
+     * persist the user.
+     * @param RouterInterface router The router service.
+    */
     public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $entityManager, RouterInterface $router)
     {
         $this->clientRegistry = $clientRegistry;
@@ -29,12 +45,27 @@ class DiscordAuthenticator extends OAuth2Authenticator{
         $this->router = $router;
     }
 
+    /**
+     * If the route is oauth_check and the service is discord, then continue.
+     * 
+     * @param Request request The request object
+     * 
+     * @return ?bool The return value of this method must be one of the following:
+    */
     public function supports(Request $request): ?bool
     {
         // continue ONLY if the current ROUTE matches the check ROUTE
         return 'oauth_check' === $request->attributes->get('_route') && $request->get('service') === 'discord';
     }
 
+    /**
+     * If the user is already in the database, return the user. If not, create a new user and return
+     * that
+     * 
+     * @param Request request The incoming request.
+     * 
+     * @return Passport The user object.
+    */
     public function authenticate(Request $request): Passport
     {
         $client = $this->clientRegistry->getClient('discord');
@@ -72,6 +103,15 @@ class DiscordAuthenticator extends OAuth2Authenticator{
         );
     }
 
+    /**
+     * If the user is authenticated, redirect them to the login page.
+     * 
+     * @param Request request The request that resulted in an AuthenticationException
+     * @param TokenInterface token The token that was used to authenticate the user.
+     * @param string firewallName The name of the firewall that was used to authenticate the user.
+     * 
+     * @return ?Response A RedirectResponse object.
+    */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         $targetUrl = $this->router->generate('app_login');
@@ -80,6 +120,15 @@ class DiscordAuthenticator extends OAuth2Authenticator{
     }
 
 
+    /**
+     * If the user fails to authenticate, return a response with a message that says "Authentication
+     * failed"
+     * 
+     * @param Request request The request that resulted in an AuthenticationException
+     * @param AuthenticationException exception The exception that was thrown during authentication.
+     * 
+     * @return ?Response A Response object with a message and a HTTP status code.
+    */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         $message = strtr($exception->getMessageKey(), $exception->getMessageData());
@@ -90,7 +139,7 @@ class DiscordAuthenticator extends OAuth2Authenticator{
     /**
      * Called when authentication is needed, but it's not sent.
      * This redirects to the 'login'.
-     */
+    */
     public function start(Request $request, AuthenticationException $authException = null)
     {
         return new RedirectResponse(

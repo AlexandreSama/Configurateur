@@ -14,21 +14,38 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * It renders the login page
+     * 
+     * @param AuthenticationUtils authenticationUtils This is a Symfony service that provides some
+     * useful methods for getting information about the user's login attempt.
+     * @param EntityManagerInterface em
+     * @param UserPasswordHasherInterface hasher This is the service that will be used to hash the
+     * password.
+     * 
+     * @return Response A response object.
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, EntityManagerInterface $em, UserPasswordHasherInterface $hasher): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    /**
+     * "Get the Discord client from the ClientRegistry and redirect the user to the Discord OAuth2
+     * server."
+     * 
+     * The ClientRegistry is a service that holds all of the OAuth2 clients that you've configured. In
+     * this case, we're getting the Discord client
+     * 
+     * @param ClientRegistry clientRegistry This is the service that will be used to get the client.
+     * 
+     * @return RedirectResponse A redirect response to the discord login page.
+     */
     #[Route(path: '/connect/discord', name: 'discord_connect')]
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
@@ -36,6 +53,9 @@ class SecurityController extends AbstractController
         return $client->redirect(['identify', 'email']);
     }
 
+    /**
+     * This method can be blank - it will be intercepted by the logout key on your firewall.
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
