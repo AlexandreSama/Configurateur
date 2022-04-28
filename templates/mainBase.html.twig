@@ -3,24 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Accueil!{% endblock %}</title>
-        <link rel="shortcut icon" href="assets/images/gt_favicon.png">        
+        <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+        <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">    
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
-            <!-- Custom styles for our template -->
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-theme.css') }}" media="screen" >
-            <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+            <!-- Vendor CSS Files -->
+            <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+        
+            <!-- Template Main CSS File -->
+            <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
         {% endblock %}
 
         {% block javascripts %}
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-            <script src="{{ asset('assets/js/headroom.min.js') }}"></script>
-            <script src="{{ asset('assets/js/jQuery.headroom.min.js') }}"></script>
-            <script src="{{ asset('assets/js/template.js') }}"></script>
+            <!-- Vendor JS Files -->
+            <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+
+            <!-- Template Main JS File -->
+            <script src="{{ asset('assets/js/main.js') }}"></script>
         {% endblock %}
     </head>
     <body class="home">
