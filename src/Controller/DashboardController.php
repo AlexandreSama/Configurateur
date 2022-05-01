@@ -8,19 +8,36 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/dashboard_admin', name: 'dashboard_admin')]
+    #[Route('/dashboard', name: 'dashboard')]
     public function dashboard_admin(): Response
     {
-        return $this->render('dashboard/dashboard_admin.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
-    }
+        if($this->getUser()){
 
-    #[Route('/dashboard', name: 'dashboard')]
-    public function dashboard(): Response
-    {
-        return $this->render('dashboard/dashboard.html.twig', [
-            'controller_name' => 'DashboardController',
-        ]);
+            $user = $this->getUser();
+            if(in_array('ROLE_ADMIN', $user->getRoles())){
+                $role = 'Administrateur';
+                return $this->render('dashboard/dashboard_admin.html.twig', [
+                    'controller_name' => 'DashboardController',
+                    'user' => $user,
+                    'role' => $role
+                ]);
+
+            }else{
+
+                return $this->render('dashboard/dashboard.html.twig', [
+                    'controller_name' => 'DashboardController',
+                    'user' => $user
+                ]);
+
+            }
+
+        }else{
+
+            return $this->render('security/login.html.twig', [
+                'controller_name' => 'DashboardController'
+            ]);
+
+        }
+
     }
 }

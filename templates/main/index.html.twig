@@ -54,7 +54,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="#" class="btn_1 d-none d-sm-block">Se connecter</a>
+                        {% if app.user %}
+                            <a href="{{ path('dashboard') }}" class="btn_1 d-none d-sm-block">Dashboard</a>
+                        {% else %}
+                            <a href="{{ path('discord_connect') }}" class="btn_1 d-none d-sm-block">Se connecter</a>
+                        {% endif %}
                     </nav>
                 </div>
             </div>

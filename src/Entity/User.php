@@ -31,6 +31,9 @@ class User implements UserInterface
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Articles::class)]
     private $articles;
 
+    #[ORM\Column(type: 'text')]
+    private $profile_picture;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -141,6 +144,18 @@ class User implements UserInterface
                 $article->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profile_picture;
+    }
+
+    public function setProfilePicture(string $profile_picture): self
+    {
+        $this->profile_picture = $profile_picture;
 
         return $this;
     }

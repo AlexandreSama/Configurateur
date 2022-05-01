@@ -95,6 +95,7 @@ class DiscordAuthenticator extends OAuth2Authenticator{
                 }
                 $user->setEmail($email);
                 $user->setDiscordId($discordUser->getid());
+                $user->setProfilePicture($discordUser->getAvatarHash());
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
 
