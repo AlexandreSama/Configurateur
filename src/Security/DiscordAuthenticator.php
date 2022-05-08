@@ -82,6 +82,15 @@ class DiscordAuthenticator extends OAuth2Authenticator{
                 $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['discordId' => $discordUser->getid()]);
 
                 if ($existingUser) {
+                    if($existingUser->getProfilePicture() != $discordUser->getAvatarHash()){
+                        $existingUser->setProfilePicture($discordUser->getAvatarHash());
+                    }else if ($existingUser->getUsername() != $discordUser->getusername()){
+                        $existingUser->setUsername($discordUser->getusername());
+                    }else if ($existingUser->getEmail() != $email){
+                        $existingUser->setEmail($email);
+                    }
+                    $this->entityManager->persist($existingUser);
+                    $this->entityManager->flush();
                     return $existingUser;
                 }
 

@@ -43,6 +43,35 @@
             <!-- Custom js for this page -->
             <script src="{{asset('assets/dashboard/js/dashboard.js') }}"></script>
             <!-- End custom js for this page -->
+            <script>
+                $(document).on('click', '#restartBot', function(){
+                    $.ajax({
+                        url: "{{ path('restart_bot_dashboard') }}",
+                        type: 'POST',
+                        success: function(result){
+                            document.getElementById('status_start').innerHTML += result
+                        }
+                    })
+                })
+                $(document).on('click', '#startBot', function(){
+                    $.ajax({
+                        url: "{{ path('start_bot_dashboard') }}",
+                        type: 'POST',
+                        success: function(result){
+                            document.getElementById('status_start').innerHTML += result
+                        }
+                    })
+                })
+                $(document).on('click', '#updateBot', function(){
+                    $.ajax({
+                        url: "{{ path('update_bot_dashboard') }}",
+                        type: 'POST',
+                        success: function(result){
+                            document.getElementById('status_update').innerHTML += result
+                        }
+                    })
+                })
+            </script>
         {% endblock %}
     </head>
     <body>

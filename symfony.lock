@@ -116,6 +116,9 @@
     "nikic/php-parser": {
         "version": "v4.13.2"
     },
+    "paragonie/constant_time_encoding": {
+        "version": "v2.5.0"
+    },
     "paragonie/random_compat": {
         "version": "v9.99.100"
     },
@@ -133,6 +136,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.6.1"
+    },
+    "phpseclib/phpseclib": {
+        "version": "3.0.14"
     },
     "phpspec/prophecy": {
         "version": "v1.15.0"
