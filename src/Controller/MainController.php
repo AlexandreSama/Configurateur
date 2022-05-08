@@ -21,4 +21,18 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+
+    /**
+     * It returns a response object that renders the template `main/index.html.twig` and passes the
+     * variable `controller_name` to the template
+     * 
+     * @return Response A response object
+     */
+    #[Route('/staff', name: 'Staff')]
+    public function staff(): Response
+    {
+        return $this->render('main/staff.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
 }
